@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { estateApi } from "@/lib/api";
 import { PropertyComparisonTable } from "@/components/property/PropertyComparisonTable";
@@ -9,7 +9,7 @@ import { ArrowLeft, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Property } from "@/types/property";
 
-export default function ComparePage() {
+function ComparePageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { selectedIds, removeProperty, deselectAll } = usePropertyComparison();
@@ -128,5 +128,20 @@ export default function ComparePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ComparePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-estate-navy border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-estate-muted">Loading comparison...</p>
+        </div>
+      </div>
+    }>
+      <ComparePageContent />
+    </Suspense>
   );
 }
