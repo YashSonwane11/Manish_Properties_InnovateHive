@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR.parent / "database"
+DATA_DIR = BASE_DIR / "database"
 SUB_AREAS_PATH = DATA_DIR / "sub_areas.json"
 AGENTS_PATH = DATA_DIR / "agents.json"
 
