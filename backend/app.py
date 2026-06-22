@@ -36,7 +36,9 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     # Configure CORS properly - this is the only CORS configuration needed
-    allowed_origins = os.environ.get('ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',')
+    raw_origins = os.environ.get('ALLOWED_ORIGINS') or os.environ.get('CORS_ORIGINS') or 'http://localhost:3000,http://127.0.0.1:3000'
+    allowed_origins = [o.strip() for o in raw_origins.split(',')]
+    print(f"CORS Allowed Origins: {allowed_origins}", flush=True)
     CORS(
         app,
         origins=allowed_origins,
