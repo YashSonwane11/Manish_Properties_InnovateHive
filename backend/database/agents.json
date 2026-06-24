@@ -239,7 +239,7 @@
     "role": "AGENT",
     "name": "test Agent",
     "phone": "0912345678",
-    "status": "active",
+    "status": "PENDING",
     "savedProperties": [],
     "createdAt": "2026-06-22T11:57:09.980059",
     "city_id": "city_pune",
